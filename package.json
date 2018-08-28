@@ -1,0 +1,18 @@
+{
+  "name": "erc20token",
+  "version": "1.0.0",
+  "description": "Ethereum smart contract for ERC20 token with account freeze and refund functions.",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Gautam Dhameja",
+  "license": "MIT",
+  "dependencies": {
+    "openzeppelin-solidity": "1.12.0"
+  }
+}
