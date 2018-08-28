@@ -19,8 +19,8 @@ contract Token is StandardToken {
     // mapping
     mapping(address => bool) public frozenAccount;
 
-    // full list of receiver accounts
-    address[] public addressLUT;
+    // list of receiver accounts
+    address[] public receivers;
 
     // events
     event FundsFrozen(address target, bool frozen);
@@ -50,9 +50,9 @@ contract Token is StandardToken {
 
     // returns full list of receiver addresses
     function getAccountList() public view returns (address[]) {
-        address[] memory v = new address[](addressLUT.length);
-        for (uint256 i = 0; i < addressLUT.length; i++) {
-            v[i] = addressLUT[i];
+        address[] memory v = new address[](receivers.length);
+        for (uint256 i = 0; i < receivers.length; i++) {
+            v[i] = receivers[i];
         }
         return v;
     }
@@ -84,7 +84,7 @@ contract Token is StandardToken {
         require(super.transfer(_to, _value), "Transfer failed.");
 
         // record the receiver address into list
-        addressLUT.push(_to);
+        receivers.push(_to);
         
         // automatically freeze receiver that is not whitelisted
         if (frozenAccount[_to] == false && !unFreeze) {
@@ -111,7 +111,7 @@ contract Token is StandardToken {
         require(super.transferFrom(_from, _to, _value), "Transfer failed.");
         
         // record the receiver address into list
-        addressLUT.push(_to);
+        receivers.push(_to);
         
         // automatically freeze account
         // don't freeze if open to all
